@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="py-4"></div>
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class=" col-lg-9   mb-5 mb-lg-0">
+        <article>
+          <div class="post-slider mb-4">
+            <img src="{{blog_detail.image.url}}" class="card-img" alt="post-thumb">
+          </div>
+          <h1 class="h2">{{blog_detail.title}} </h1>
+          <ul class="card-meta my-3 list-inline">
+            <li class="list-inline-item">
+              <a href="author-single.html" class="card-meta-author">
+                <img src="{{blog_detail.author.author.image.url}}">
+                <span>{{blog_detail.author.username}}</span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <i class="ti-timer"></i>{{blog_detail.read_time}} Min To Read
+            </li>
+            <li class="list-inline-item">
+              <i class="ti-calendar"></i>{{blog_detail.date_published}}
+            </li>
+            <li class="list-inline-item">
+              <ul class="card-meta-tag list-inline">
+                <li class="list-inline-item"><a href="tags.html">Color</a></li>
+                <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
+                <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+              </ul>
+            </li>
+          </ul>
+          <div class="content">{{blog_detail.body|safe}}</div>
+        </article>
+        
+      </div>
+
+      <div class="col-lg-9 col-md-12">
+          <div class="mb-5 border-top mt-4 pt-5">
+              <h3 class="mb-4">Comments</h3>
+              {% for comment in comments %}
+              <div class="media d-block d-sm-flex mb-4 pb-4">
+                  <a class="d-inline-block mr-2 mb-3 mb-md-0" href="#">
+                      <img src="https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_1280.png" width=80px class="mr-3 rounded-circle" alt="">
+                  </a>
+                  <div class="media-body">
+                      <a href="#!" class="h4 d-inline-block mb-3">{{comment.name}}</a>
+
+                      <p>{{comment.comment}}</p>
+                      
+                      <span class="text-black-800 mr-3 font-weight-600">April 18, 2020 at 6.25 pm</span>
+                      <a class="text-primary font-weight-600" href="#!">Reply</a>
+                  </div>
+              </div>
+              {% endfor %}
+          </div>
+
+          <div>
+              <h3 class="mb-4">Leave a Reply</h3>
+              <form method="POST">
+                {% csrf_token %}
+                  <div class="row">
+                      <div class="form-group col-md-12">
+                        {{ form.comment }}
+                      </div>
+                      <div class="form-group col-md-4">
+                        {{ form.name }}                      </div>
+                      <div class="form-group col-md-4">
+                        {{ form.email }}                      </div>
+                      <div class="form-group col-md-4">
+                          <input class="form-control shadow-none" type="url" placeholder="Website">
+                          <p class="font-weight-bold valid-feedback">OK! You can skip this field.</p>
+                      </div>
+                  </div>
+                  <button class="btn btn-primary" type="submit">Comment Now</button>
+              </form>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

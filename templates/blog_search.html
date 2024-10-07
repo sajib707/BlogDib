@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="container" style="margin-top: 120px; margin-bottom: 120px">
+    <h2>Search in all Blogs</h2>
+    <form method="get" action="{% url 'myBlog:blog_search' %}">
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+
+    {% if query %}
+        <h3>Results for "{{ query }}":</h3>
+        <ul>
+            {% for blog in results %}
+                <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a></li>
+            {% empty %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</div>
+{% endblock %}
