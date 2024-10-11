@@ -5,7 +5,7 @@ from .models import Category, Blogs, Author, Comment
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug', 'approved']
+    list_display = ('name', 'slug', 'approved')
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -33,5 +33,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ['image', 'bio', 'job_title', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url']
+    list_display = ('image', 'bio', 'job_title', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url')
 

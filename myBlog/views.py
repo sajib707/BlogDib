@@ -19,7 +19,11 @@ def index(request):
     eblogs = Blogs.objects.filter(is_editors_pick=True)
     tblogs = Blogs.objects.filter(is_trending_post=True)
     pblogs = Blogs.objects.filter(is_popular_blog=True)
-    return render(request, 'index.html', {'blogs': blogs, 'eblogs': eblogs, 'tblogs': tblogs, 'pblogs': pblogs})
+    authors = Author.objects.all()
+    paginator = Paginator(blogs, 2)  # Show 2 contacts per page.
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'index.html', {'blogs': blogs, 'eblogs': eblogs, 'tblogs': tblogs, 'pblogs': pblogs, 'authors': authors, "page_obj": page_obj})
 
 
 def all_blogs(request, slug=None):
@@ -85,3 +89,6 @@ def blog_search(request):
             ).distinct()
 
     return render(request, 'blog_search.html', {'form': form, 'query': query, 'results': results})
+
+def about(request):
+    return render(request,'about_us.html')

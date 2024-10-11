@@ -83,7 +83,7 @@
               <ul class="card-meta list-inline">
                 <li class="list-inline-item">
                   <a href="author-single.html" class="card-meta-author">
-                    <img src="images/john-doe.jpg">
+                    <img src="{{eb.author.author.image.url}}">
                     <span>Charls Xaviar</span>
                   </a>
                 </li>
@@ -178,7 +178,7 @@
         <div class="col-lg-8  mb-5 mb-lg-0">
     <h2 class="h5 section-title">Recent Post</h2>
     <article class="card mb-4">
-    {% for b in blogs %}
+    {% for b in page_obj %}
     <div class="post-slider">
         <img src="{{b.image.url}}" class="card-img-top" alt="post-thumb">
     </div>
@@ -209,18 +209,24 @@
       </div>
       {% endfor %}
     </article>
+<div class="text-center">
+    <span class="step-links">  
+      {% if page_obj.has_previous %}
+          <a href="?page=1">&laquo; First </a>
+          <a href="?page={{ page_obj.previous_page_number }}"> Previous </a>
+      {% endif %}
+
+      <span class="current">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+      </span>
+
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}"> Next </a>
+          <a href="?page={{ page_obj.paginator.num_pages }}"> Last &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
   
-    <ul class="pagination justify-content-center">
-      <li class="page-item page-item active ">
-          <a href="#!" class="page-link">1</a>
-      </li>
-      <li class="page-item">
-          <a href="#!" class="page-link">2</a>
-      </li>
-      <li class="page-item">
-          <a href="#!" class="page-link">&raquo;</a>
-      </li>
-    </ul>
   </div>
         <aside class="col-lg-4 sidebar-home">
     <!-- Search -->
@@ -254,7 +260,7 @@
       <a href="about-me.html" class="btn btn-primary mb-2">About me</a>
     </div>
     
-    <!-- Promotion -->
+    <!-- Promotion 
     <div class="promotion">
       <img src="images/promotion.jpg" class="img-fluid w-100">
       <div class="promotion-content">
@@ -263,40 +269,23 @@
         <a href="https://themefisher.com/" class="btn btn-primary">Get Started</a>
       </div>
     </div>
-  
+    -->
     <!-- authors -->
     <div class="widget widget-author">
       <h4 class="widget-title">Authors</h4>
+      {% for author in authors %}      
       <div class="media align-items-center">
         <div class="mr-3">
-          <img class="widget-author-image" src="images/john-doe.jpg">
+          <img class="widget-author-image" src="{{author.image.url}}">
         </div>
         <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">Charls Xaviar</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
+          <h5 class="mb-1"><a class="post-title" href="author-single.html">{{author.user.username}}</a></h5>
+          <span>Author &amp; {{author.job_title}}</span>
         </div>
       </div>
-      <div class="media align-items-center">
-        <div class="mr-3">
-          <img class="widget-author-image" src="images/kate-stone.jpg">
-        </div>
-        <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">Kate Stone</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
-        </div>
-      </div>
-      <div class="media align-items-center">
-        <div class="mr-3">
-          <img class="widget-author-image" src="images/john-doe.jpg" alt="John Doe">
-        </div>
-        <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">John Doe</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
-        </div>
-      </div>
-    </div>
-    <!-- Search -->
-    
+      {% endfor %}  
+
+    <!--     
     <div class="widget">
       <h4 class="widget-title"><span>Never Miss A News</span></h4>
       <form action="#!" method="post" name="mc-embedded-subscribe-form" target="_blank"
@@ -309,7 +298,8 @@
         </div>
       </form>
     </div>
-  
+    -->
+
     <!-- categories -->
     <div class="widget widget-categories">
       <h4 class="widget-title"><span>Categories</span></h4>
@@ -327,74 +317,8 @@
         <li><a href="tags.html" class="d-flex">Vlog <small class="ml-auto">(1)</small></a></li>
         <li><a href="tags.html" class="d-flex">Wondarland <small class="ml-auto">(1)</small></a></li>
       </ul>
-    </div><!-- tags -->
-    <div class="widget">
-      <h4 class="widget-title"><span>Tags</span></h4>
-      <ul class="list-inline widget-list-inline widget-card">
-        <li class="list-inline-item"><a href="tags.html">City</a></li>
-        <li class="list-inline-item"><a href="tags.html">Color</a></li>
-        <li class="list-inline-item"><a href="tags.html">Creative</a></li>
-        <li class="list-inline-item"><a href="tags.html">Decorate</a></li>
-        <li class="list-inline-item"><a href="tags.html">Demo</a></li>
-        <li class="list-inline-item"><a href="tags.html">Elements</a></li>
-        <li class="list-inline-item"><a href="tags.html">Fish</a></li>
-        <li class="list-inline-item"><a href="tags.html">Food</a></li>
-        <li class="list-inline-item"><a href="tags.html">Nice</a></li>
-        <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-        <li class="list-inline-item"><a href="tags.html">Season</a></li>
-        <li class="list-inline-item"><a href="tags.html">Taste</a></li>
-        <li class="list-inline-item"><a href="tags.html">Tasty</a></li>
-        <li class="list-inline-item"><a href="tags.html">Vlog</a></li>
-        <li class="list-inline-item"><a href="tags.html">Wow</a></li>
-      </ul>
-    </div><!-- recent post -->
-    <div class="widget">
-      <h4 class="widget-title">Recent Post</h4>
-  
-      <!-- post-item -->
-      <article class="widget-card">
-        <div class="d-flex">
-          <img class="card-img-sm" src="images/post/post-10.jpg">
-          <div class="ml-3">
-            <h5><a class="post-title" href="post/elements/">Elements That You Can Use In This Template.</a></h5>
-            <ul class="card-meta list-inline mb-0">
-              <li class="list-inline-item mb-0">
-                <i class="ti-calendar"></i>15 jan, 2020
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
-      
-      <article class="widget-card">
-        <div class="d-flex">
-          <img class="card-img-sm" src="images/post/post-3.jpg">
-          <div class="ml-3">
-            <h5><a class="post-title" href="post-details.html">Advice From a Twenty Something</a></h5>
-            <ul class="card-meta list-inline mb-0">
-              <li class="list-inline-item mb-0">
-                <i class="ti-calendar"></i>14 jan, 2020
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
-      
-      <article class="widget-card">
-        <div class="d-flex">
-          <img class="card-img-sm" src="images/post/post-7.jpg">
-          <div class="ml-3">
-            <h5><a class="post-title" href="post-details.html">Advice From a Twenty Something</a></h5>
-            <ul class="card-meta list-inline mb-0">
-              <li class="list-inline-item mb-0">
-                <i class="ti-calendar"></i>14 jan, 2020
-              </li>
-            </ul>
-          </div>
-        </div>
-      </article>
     </div>
-  
+
     <!-- Social -->
     <div class="widget">
       <h4 class="widget-title"><span>Social Links</span></h4>
@@ -410,7 +334,6 @@
       </div>
     </div>
   </section>
-  
 
 <script>
   function validateSearch() {
