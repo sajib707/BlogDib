@@ -18,7 +18,7 @@
             <li class="list-inline-item">
               <a href="author-single.html" class="card-meta-author">
                 <img src="{{blog_detail.author.author.image.url}}">
-                <span>{{blog_detail.author.username}}</span>
+                <span>{{blog_detail.author.author.fullname}}</span>
               </a>
             </li>
             <li class="list-inline-item">
@@ -29,9 +29,7 @@
             </li>
             <li class="list-inline-item">
               <ul class="card-meta-tag list-inline">
-                <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+                <li class="list-inline-item"><a href="blog_detail.category.get_absolute_url">{{blog_detail.category.name}}</a></li>
               </ul>
             </li>
           </ul>
@@ -53,7 +51,7 @@
 
                       <p>{{comment.comment}}</p>
                       
-                      <span class="text-black-800 mr-3 font-weight-600">April 18, 2020 at 6.25 pm</span>
+                      <span class="text-black-800 mr-3 font-weight-600">{{comment.date_created}}</span>
                       <a class="text-primary font-weight-600" href="#!">Reply</a>
                   </div>
               </div>

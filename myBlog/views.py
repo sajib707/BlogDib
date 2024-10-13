@@ -22,7 +22,7 @@ def index(request):
     pblogs = Blogs.objects.filter(is_popular_blog=True)
     authors = Author.objects.all()
     categories = Category.objects.annotate(blog_count=Count('category'))
-    paginator = Paginator(blogs, 2)  # Show 2 contacts per page.
+    paginator = Paginator(blogs, 10)  
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(request, 'index.html', {'blogs': blogs, 
@@ -37,10 +37,14 @@ def index(request):
 def all_blogs(request, slug=None):
     all_blogs = Blogs.objects.all().order_by("-date_created")
     authors = Author.objects.all()
-    paginator = Paginator(all_blogs, 2)  # Show 2 contacts per page.
+    categories = Category.objects.annotate(blog_count=Count('category'))
+    paginator = Paginator(all_blogs, 10)  
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request,'all_blogs.html', {'all_blogs' : all_blogs, 'authors': authors, "page_obj": page_obj})
+    return render(request,'all_blogs.html', {'all_blogs' : all_blogs, 
+                                             'authors': authors,
+                                             'categories':categories, 
+                                             "page_obj": page_obj})
 
 def all_authors(request, slug=None):
     authors = Author.objects.all()
@@ -55,7 +59,12 @@ def author_detail(request, slug):
 def filter_blogs(request, slug=None): 
     category = get_object_or_404(Category, slug=slug)
     filter_blogs = Blogs.objects.filter(category = category)
-    return render(request,'filter_blogs.html', {'category' : category, 'filter_blogs' : filter_blogs})
+    paginator = Paginator(filter_blogs, 10)  
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+    return render(request,'filter_blogs.html', {'category' : category, 
+                                                'filter_blogs' : filter_blogs,
+                                                'page_obj': page_obj})
 
 
 def blog_detail(request, slug):
@@ -103,3 +112,6 @@ def blog_search(request):
 
 def about(request):
     return render(request,'about_us.html')
+
+def contact(request):
+    return render(request,'contact.html')

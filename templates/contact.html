@@ -2,13 +2,18 @@
 
 {% load static %}
 
-{% block content %} 
+{% block content %}
 
 <div class="header text-center">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 mx-auto">
-        <h1 class="mb-4">Authors</h1>
+        <h1 class="mb-4">Contact Us</h1>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a class="text-default" href="">Home
+              &nbsp; &nbsp; /</a></li>
+          <li class="list-inline-item text-primary">Contact Us</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -63,32 +68,36 @@
 
 <section class="section-sm">
   <div class="container">
-    <div class="row no-gutters">
-      {% for author in all_authors %}
-      <div class="col-lg-4 col-sm-6 author-block">
-        <div class="author-card text-center">
-          <img class="author-image" src="{{author.image.url}}">
-          
-          <h3 class="mb-2"><a href="{{author.get_absolute_url}}" class="post-title">{{author.fullname}}</a></h3>
-          <p class="mb-3">Author &amp; {{author.job_title}}</p>
-                    
-          <ul class="list-inline social-icons">
-            
-            <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-            
-            <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
-            
-            <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
-            
-            <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-            
-          </ul>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        
+        <div class="content mb-5">
+          <h2 id="we-would-love-to-hear-from-you">We would Love To Hear From You&hellip;.</h2>
         </div>
+        
+        <form method="POST" action="#">
+          <div class="form-group">
+            <label for="name">Your Name (Required)</label>
+            <input type="text" name="name" id="name" class="form-control" placeholder="John Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email Address (Required)</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="johndoe@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Reason For Contact</label>
+            <input type="email" name="email" id="email" class="form-control" placeholder="Advertising">
+          </div>
+          <div class="form-group">
+            <label for="message">Your Message Here</label>
+            <textarea name="message" id="message" class="form-control" placeholder="Lorem ipsum dolor sit amet..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send Now</button>
+        </form>
       </div>
-      {% endfor %}
     </div>
   </div>
 </section>
 
 
-{% endblock  %}
+{% endblock %}
