@@ -20,25 +20,24 @@
         <ul class="card-meta list-inline">
         <li class="list-inline-item">
             <a href="author-single.html" class="card-meta-author">
-            <img src="images/john-doe.jpg" alt="John Doe">
-            <span>John Doe</span>
+            <img src="{{b.author.author.image.url}}" alt="John Doe">
+            <span>{{b.author.author.fullname}}</span>
             </a>
         </li>
         <li class="list-inline-item">
-            <i class="ti-timer"></i>3 Min To Read
+            <i class="ti-timer"></i>{{b.read_time}} Min To Read
         </li>
         <li class="list-inline-item">
-            <i class="ti-calendar"></i>15 jan, 2020
+            <i class="ti-calendar"></i>{{b.date_published}}
         </li>
         <li class="list-inline-item">
             <ul class="card-meta-tag list-inline">
-            <li class="list-inline-item"><a href="tags.html">Demo</a></li>
-            <li class="list-inline-item"><a href="tags.html">Elements</a></li>
+            <li class="list-inline-item"><a href="tags.html">{{b.category.name}}</a></li>
             </ul>
         </li>
         </ul>
-        <p>Heading example Here is example of hedings. You can use this heading by following markdownify rules. For example: use # for heading 1 and use ###### for heading 6.</p>
-        <a href="post-elements.html" class="btn btn-outline-primary">Read More</a>
+        <p>{{b.body|safe|truncatechars:250}}</p>
+        <a href="{{b.get_absolute_url}}" class="btn btn-outline-primary">Read More</a>
       </div>
       {% endfor %}
     </article>
@@ -61,36 +60,20 @@
   </div>
         <aside class="col-lg-4 sidebar-home"> 
     <!-- authors -->
-    <div class="widget widget-author">
+    <div class="widget widget-author text-left">
       <h4 class="widget-title">Authors</h4>
+      {% for author in authors%}
       <div class="media align-items-center">
         <div class="mr-3">
-          <img class="widget-author-image" src="images/john-doe.jpg">
+          <img class="widget-author-image" src="{{author.image.url}}">
         </div>
         <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">Charls Xaviar</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
+          <h5 class="mb-1"><a class="post-title" href="{{author.get_absolute_url}}">{{author.fullname}}</a></h5>
+          <span>Author &amp; {{author.job_title}}</span>
         </div>
       </div>
-      <div class="media align-items-center">
-        <div class="mr-3">
-          <img class="widget-author-image" src="images/kate-stone.jpg">
-        </div>
-        <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">Kate Stone</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
-        </div>
-      </div>
-      <div class="media align-items-center">
-        <div class="mr-3">
-          <img class="widget-author-image" src="images/john-doe.jpg" alt="John Doe">
-        </div>
-        <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">John Doe</a></h5>
-          <span>Author &amp; developer of Bexer, Biztrox theme</span>
-        </div>
-      </div>
-    </div>
+      {% endfor %}
+
     <!-- Search -->
 
   

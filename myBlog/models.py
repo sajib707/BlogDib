@@ -92,6 +92,7 @@ class Blogs(models.Model):
 
 class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    fullname = models.CharField(max_length=100, help_text="Enter you full name")
     slug = models.SlugField(max_length=255)
     image = models.ImageField(default='profile-pic-default.jpg',
                               upload_to='profile_pics')

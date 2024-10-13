@@ -33,5 +33,5 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Author)
 class AuthorAdmin(admin.ModelAdmin):
-    list_display = ('image', 'bio', 'job_title', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url')
+    list_display = ('fullname','image', 'bio', 'job_title', 'facebook_url', 'twitter_url', 'linkedin_url', 'github_url')
 

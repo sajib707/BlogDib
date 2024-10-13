@@ -82,22 +82,20 @@
               <h3 class="h4 mb-3"><a class="post-title" href="">{{eb.title}}</a></h3>
               <ul class="card-meta list-inline">
                 <li class="list-inline-item">
-                  <a href="author-single.html" class="card-meta-author">
+                  <a href="{{eb.author.author.get_absolute_url}}" class="card-meta-author">
                     <img src="{{eb.author.author.image.url}}">
-                    <span>Charls Xaviar</span>
+                    <span>{{eb.author.author.fullname}}</span>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <i class="ti-timer"></i>2 Min To Read
+                  <i class="ti-timer"></i>{{eb.read_time}} Min To Read
                 </li>
                 <li class="list-inline-item">
-                  <i class="ti-calendar"></i>14 jan, 2020
+                  <i class="ti-calendar"></i>{{eb.date_published}}
                 </li>
                 <li class="list-inline-item">
                   <ul class="card-meta-tag list-inline">
-                    <li class="list-inline-item"><a href="tags.html">Color</a></li>
-                    <li class="list-inline-item"><a href="tags.html">Recipe</a></li>
-                    <li class="list-inline-item"><a href="tags.html">Fish</a></li>
+                    <li class="list-inline-item"><a href="{{eb.category.get_absolute_url}}">{{eb.category.name}}</a></li>
                   </ul>
                 </li>
               </ul>
@@ -114,13 +112,13 @@
             <div class="card-body d-flex">
               <img class="card-img-sm" src="{{tb.image.url}}">
               <div class="ml-3">
-                <h4><a href="post-details.html" class="post-title">{{tb.title}}</a></h4>
+                <h4><a href="{{tb.get_absolute_url}}" class="post-title">{{tb.title}}</a></h4>
                 <ul class="card-meta list-inline mb-0">
                   <li class="list-inline-item mb-0">
-                    <i class="ti-calendar"></i>14 jan, 2020
+                    <i class="ti-calendar"></i>{{tb.date_published}}
                   </li>
                   <li class="list-inline-item mb-0">
-                    <i class="ti-timer"></i>2 Min To Read
+                    <i class="ti-timer"></i>{{tb.read_time}} Min To Read
                   </li>
                 </ul>
               </div>
@@ -137,30 +135,28 @@
               <img src="{{pb.image.url}}" class="card-img-top" alt="post-thumb">
             </div>
             <div class="card-body">
-              <h3 class="h4 mb-3"><a class="post-title" href="post-details.html">{{pb.title}}</a></h3>
+              <h3 class="h4 mb-3"><a class="post-title" href="{{pb.get_absolute_url}}">{{pb.title}}</a></h3>
               <ul class="card-meta list-inline">
                 <li class="list-inline-item">
-                  <a href="author-single.html" class="card-meta-author">
-                    <img src="images/kate-stone.jpg" alt="Kate Stone">
-                    <span>Kate Stone</span>
+                  <a href="{{pb.author.author.get_absolute_url}}" class="card-meta-author">
+                    <img src="{{pb.author.author.image.url}}" alt="Kate Stone">
+                    <span>{{pb.author.author.fullname}}</span>
                   </a>
                 </li>
                 <li class="list-inline-item">
-                  <i class="ti-timer"></i>2 Min To Read
+                  <i class="ti-timer"></i>{{pb.read_time}} Min To Read
                 </li>
                 <li class="list-inline-item">
-                  <i class="ti-calendar"></i>14 jan, 2020
+                  <i class="ti-calendar"></i>{{pb.date_published}}
                 </li>
                 <li class="list-inline-item">
                   <ul class="card-meta-tag list-inline">
-                    <li class="list-inline-item"><a href="tags.html">City</a></li>
-                    <li class="list-inline-item"><a href="tags.html">Food</a></li>
-                    <li class="list-inline-item"><a href="tags.html">Taste</a></li>
+                    <li class="list-inline-item"><a href="{{pb.category.get_absolute_url}}">{{pb.category.name}}</a></li>
                   </ul>
                 </li>
               </ul>
-              <p>It’s no secret that the digital industry is booming. From exciting startups to …</p>
-              <a href="post-details.html" class="btn btn-outline-primary">Read More</a>
+              <p>{{pb.body|safe|truncatechars:100}}</p>
+              <a href="{{pb.get_absolute_url}}" class="btn btn-outline-primary">Read More</a>
             </div>
           </article>
           {% endfor %}
@@ -183,28 +179,27 @@
         <img src="{{b.image.url}}" class="card-img-top" alt="post-thumb">
     </div>
     <div class="card-body">        
-        <h3 class="mb-3"><a class="post-title" href="post-elements.html">{{b.title}}</a></h3>
+        <h3 class="mb-3"><a class="post-title" href="{{b.get_absolute_url}}">{{b.title}}</a></h3>
         <ul class="card-meta list-inline">
         <li class="list-inline-item">
-            <a href="author-single.html" class="card-meta-author">
-            <img src="images/john-doe.jpg" alt="John Doe">
-            <span>John Doe</span>
+            <a href="{{b.author.author.get_absolute_url}}" class="card-meta-author">
+            <img src="{{b.author.author.image.url}}" alt="John Doe">
+            <span>{{b.author.author.fullname}}</span>
             </a>
         </li>
         <li class="list-inline-item">
-            <i class="ti-timer"></i>3 Min To Read
+            <i class="ti-timer"></i>{{b.read_time}} Min To Read
         </li>
         <li class="list-inline-item">
-            <i class="ti-calendar"></i>15 jan, 2020
+            <i class="ti-calendar"></i>{{b.date_published}}
         </li>
         <li class="list-inline-item">
             <ul class="card-meta-tag list-inline">
-            <li class="list-inline-item"><a href="tags.html">Demo</a></li>
-            <li class="list-inline-item"><a href="tags.html">Elements</a></li>
+            <li class="list-inline-item"><a href="{{b.category.get_absolute_url}}">{{b.category.name}}</a></li>
             </ul>
         </li>
         </ul>
-        <p>Heading example Here is example of hedings. You can use this heading by following markdownify rules. For example: use # for heading 1 and use ###### for heading 6.</p>
+        <p>{{b.body|safe|truncatechars:150}}</p>
         <a href="{{b.get_absolute_url}}" class="btn btn-outline-primary">Read More</a>
       </div>
       {% endfor %}
@@ -241,23 +236,20 @@
   
     <!-- about me -->
     <div class="widget widget-about">
-      <h4 class="widget-title">Hi, I am Alex!</h4>
-      <img class="img-fluid" src="images/author.jpg" alt="Themefisher">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel in in donec iaculis tempus odio nunc laoreet . Libero ullamcorper.</p>
+      <h4 class="widget-title">Hi, I am Sajib!</h4>
+      <img class="img-fluid" src="{% static 'images/sajib.jpg' %}" alt="Themefisher">
+      <p>Passionate writer and content creator at BlogDib, sharing insights on technology, lifestyle, and personal growth. With a love for storytelling, I strive to inspire and engage readers through meaningful, well-researched articles.</p>
       <ul class="list-inline social-icons mb-3">
         
-        <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=100004589626972" target="_blank"><i class="ti-facebook"></i></a></li>
         
-        <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+        <li class="list-inline-item"><a href="https://x.com/8721cebf8d144a5" target="_blank"><i class="ti-twitter-alt"></i></a></li>
         
-        <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-        
-        <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
-        
-        <li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
+        <li class="list-inline-item"><a href="https://www.linkedin.com/in/sajib-007/" target="_blank"><i class="ti-linkedin"></i></a></li>
+                
+        <li class="list-inline-item"><a href="https://www.youtube.com/@blogdib" target="_blank"><i class="ti-youtube"></i></a></li>
         
       </ul>
-      <a href="about-me.html" class="btn btn-primary mb-2">About me</a>
     </div>
     
     <!-- Promotion 
@@ -279,7 +271,7 @@
           <img class="widget-author-image" src="{{author.image.url}}">
         </div>
         <div class="media-body">
-          <h5 class="mb-1"><a class="post-title" href="author-single.html">{{author.user.username}}</a></h5>
+          <h5 class="mb-1"><a class="post-title" href="{{author.get_absolute_url}}">{{author.fullname}}</a></h5>
           <span>Author &amp; {{author.job_title}}</span>
         </div>
       </div>
@@ -304,30 +296,20 @@
     <div class="widget widget-categories">
       <h4 class="widget-title"><span>Categories</span></h4>
       <ul class="list-unstyled widget-list">
-        <li><a href="tags.html" class="d-flex">Creativity <small class="ml-auto">(4)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Demo <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Elements <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Food <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Microwave <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Natural <small class="ml-auto">(3)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Newyork city <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Nice <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Tech <small class="ml-auto">(2)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Videography <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Vlog <small class="ml-auto">(1)</small></a></li>
-        <li><a href="tags.html" class="d-flex">Wondarland <small class="ml-auto">(1)</small></a></li>
-      </ul>
+        {% for category in categories%}
+        <li><a href="{{category.get_absolute_url}}" class="d-flex">{{category.name}} <small class="ml-auto">({{ category.blog_count }})</small></a></li>
+        {% endfor %}
+      </ul> 
     </div>
 
     <!-- Social -->
     <div class="widget">
       <h4 class="widget-title"><span>Social Links</span></h4>
       <ul class="list-inline widget-social">
-        <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
-        <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
-        <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
-        <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
-        <li class="list-inline-item"><a href="#"><i class="ti-youtube"></i></a></li>
+        <li class="list-inline-item"><a href="https://www.facebook.com/profile.php?id=61567002200224" target="_blank"><i class="ti-facebook"></i></a></li>
+        <li class="list-inline-item"><a href="https://x.com/Blogdib1" target="_blank"><i class="ti-twitter-alt"></i></a></li>
+        <li class="list-inline-item"><a href="https://www.linkedin.com/company/blogdib/" target="_blank"><i class="ti-linkedin"></i></a></li>
+        <li class="list-inline-item"><a href="https://www.youtube.com/@blogdib" target="_blank"><i class="ti-youtube"></i></a></li>
       </ul>
     </div>
   </aside>

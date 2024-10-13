@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block content %}
+{% block content %} 
 
 <div class="header text-center">
   <div class="container">
@@ -64,9 +64,9 @@
 <section class="section-sm">
   <div class="container">
     <div class="row no-gutters">
+      {% for author in all_authors %}
       <div class="col-lg-4 col-sm-6 author-block">
         <div class="author-card text-center">
-        {% for author in all_authors %}
           <img class="author-image" src="{{author.image.url}}">
           
           <h3 class="mb-2"><a href="{{author.get_absolute_url}}" class="post-title">{{author.user.username}}</a></h3>
@@ -84,9 +84,9 @@
             <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
             
           </ul>
-          {% endfor %}
         </div>
       </div>
+      {% endfor %}
     </div>
   </div>
 </section>

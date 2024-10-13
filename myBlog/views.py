@@ -5,6 +5,7 @@ from .forms import CommentForm
 from django.core.paginator import Paginator
 from django.db.models import Q
 from .forms import BlogSearchForm
+from django.db.models import Count
 
 
 
@@ -20,18 +21,26 @@ def index(request):
     tblogs = Blogs.objects.filter(is_trending_post=True)
     pblogs = Blogs.objects.filter(is_popular_blog=True)
     authors = Author.objects.all()
+    categories = Category.objects.annotate(blog_count=Count('category'))
     paginator = Paginator(blogs, 2)  # Show 2 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request, 'index.html', {'blogs': blogs, 'eblogs': eblogs, 'tblogs': tblogs, 'pblogs': pblogs, 'authors': authors, "page_obj": page_obj})
+    return render(request, 'index.html', {'blogs': blogs, 
+                                          'eblogs': eblogs, 
+                                          'tblogs': tblogs, 
+                                          'pblogs': pblogs, 
+                                          'authors': authors, 
+                                          'page_obj': page_obj,
+                                          'categories': categories})
 
 
 def all_blogs(request, slug=None):
     all_blogs = Blogs.objects.all().order_by("-date_created")
+    authors = Author.objects.all()
     paginator = Paginator(all_blogs, 2)  # Show 2 contacts per page.
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    return render(request,'all_blogs.html', {'all_blogs' : all_blogs, "page_obj": page_obj})
+    return render(request,'all_blogs.html', {'all_blogs' : all_blogs, 'authors': authors, "page_obj": page_obj})
 
 def all_authors(request, slug=None):
     authors = Author.objects.all()
@@ -39,9 +48,11 @@ def all_authors(request, slug=None):
 
 def author_detail(request, slug):
     author_detail = get_object_or_404(Author, slug=slug)
-    return render(request,'author_details.html', {'author_detail' : author_detail})
+    filter_blogs = Blogs.objects.filter(author=author_detail.user, is_published=True)
+    num_blogs = filter_blogs.count()
+    return render(request,'author_details.html', {'author_detail' : author_detail, 'filter_blogs': filter_blogs, 'num_blogs':num_blogs})
 
-def filter_blogs(request, slug=None):
+def filter_blogs(request, slug=None): 
     category = get_object_or_404(Category, slug=slug)
     filter_blogs = Blogs.objects.filter(category = category)
     return render(request,'filter_blogs.html', {'category' : category, 'filter_blogs' : filter_blogs})
