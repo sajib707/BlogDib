@@ -71,16 +71,16 @@
           
           <h3 class="mb-2"><a href="{{author.get_absolute_url}}" class="post-title">{{author.fullname}}</a></h3>
           <p class="mb-3">Author &amp; {{author.job_title}}</p>
-                    
+
           <ul class="list-inline social-icons">
             
-            <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="{{author.facebook_url}}" target="_blank"><i class="ti-facebook"></i></a></li>
             
-            <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="{{author.twitter_url}}" target="_blank"><i class="ti-twitter-alt"></i></a></li>
             
-            <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
+            <li class="list-inline-item"><a href="{{author.github_url}}" target="_blank"><i class="ti-github"></i></a></li>
             
-            <li class="list-inline-item"><a href="#"><i class="ti-linkedin"></i></a></li>
+            <li class="list-inline-item"><a href="{{author.linkedin_url}}" target="_blank"><i class="ti-linkedin"></i></a></li>
             
           </ul>
         </div>
